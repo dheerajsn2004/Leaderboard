@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spark Tank Leaderboard</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="InvestPage">
+    <h1 class="title">Spark Tank</h1>
+    <form id="pointsForm" class="points-form">
+      <div class="team-entry">
+        <label for="team1Name">Team Name:</label>
+        <input type="text" id="team1Name" placeholder="Enter Team Name">
+        <label for="team1Points">Points:</label>
+        <input type="number" id="team1Points" placeholder="Points">
+      </div>
+      <div class="team-entry">
+        <label for="team2Name">Team Name:</label>
+        <input type="text" id="team2Name" placeholder="Enter Team Name">
+        <label for="team2Points">Points:</label>
+        <input type="number" id="team2Points" placeholder="Points">
+      </div>
+      <div class="team-entry">
+        <label for="team3Name">Team Name:</label>
+        <input type="text" id="team3Name" placeholder="Enter Team Name">
+        <label for="team3Points">Points:</label>
+        <input type="number" id="team3Points" placeholder="Points">
+      </div>
+      <div class="team-entry">
+        <label for="team4Name">Team Name:</label>
+        <input type="text" id="team4Name" placeholder="Enter Team Name">
+        <label for="team4Points">Points:</label>
+        <input type="number" id="team4Points" placeholder="Points">
+      </div>
+      <div class="team-entry">
+        <label for="team5Name">Team Name:</label>
+        <input type="text" id="team5Name" placeholder="Enter Team Name">
+        <label for="team5Points">Points:</label>
+        <input type="number" id="team5Points" placeholder="Points">
+      </div>
+      <div class="team-entry">
+        <label for="team6Name">Team Name:</label>
+        <input type="text" id="team6Name" placeholder="Enter Team Name">
+        <label for="team6Points">Points:</label>
+        <input type="number" id="team6Points" placeholder="Points">
+      </div>
+      <div class="team-entry">
+        <label for="team7Name">Team Name:</label>
+        <input type="text" id="team7Name" placeholder="Enter Team Name">
+        <label for="team7Points">Points:</label>
+        <input type="number" id="team7Points" placeholder="Points">
+      </div>
+      <div class="team-entry">
+        <label for="team8Name">Team Name:</label>
+        <input type="text" id="team8Name" placeholder="Enter Team Name">
+        <label for="team8Points">Points:</label>
+        <input type="number" id="team8Points" placeholder="Points">
+      </div>
+      <div class="team-entry">
+        <label for="team9Name">Team Name:</label>
+        <input type="text" id="team9Name" placeholder="Enter Team Name">
+        <label for="team9Points">Points:</label>
+        <input type="number" id="team9Points" placeholder="Points">
+      </div>
+      <div class="team-entry">
+        <label for="team10Name">Team Name:</label>
+        <input type="text" id="team10Name" placeholder="Enter Team Name">
+        <label for="team10Points">Points:</label>
+        <input type="number" id="team10Points" placeholder="Points">
+      </div>
+      <div class="team-entry">
+        <label for="team11Name">Team Name:</label>
+        <input type="text" id="team11Name" placeholder="Enter Team Name">
+        <label for="team11Points">Points:</label>
+        <input type="number" id="team11Points" placeholder="Points">
+      </div>
+      <div class="team-entry">
+        <label for="team12Name">Team Name:</label>
+        <input type="text" id="team12Name" placeholder="Enter Team Name">
+        <label for="team12Points">Points:</label>
+        <input type="number" id="team12Points" placeholder="Points">
+      </div>
+      <div class="team-entry">
+        <label for="team13Name">Team Name:</label>
+        <input type="text" id="team13Name" placeholder="Enter Team Name">
+        <label for="team13Points">Points:</label>
+        <input type="number" id="team13Points" placeholder="Points">
+      </div>
+      <div class="team-entry">
+        <label for="team14Name">Team Name:</label>
+        <input type="text" id="team14Name" placeholder="Enter Team Name">
+        <label for="team14Points">Points:</label>
+        <input type="number" id="team14Points" placeholder="Points">
+      </div>
+      <div class="team-entry">
+        <label for="team15Name">Team Name:</label>
+        <input type="text" id="team15Name" placeholder="Enter Team Name">
+        <label for="team15Points">Points:</label>
+        <input type="number" id="team15Points" placeholder="Points">
+      </div>
+
+      <!-- Submit Button -->
+      <button type="button" id="submitButton" class="submit-btn">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    // Function to handle form submission
+    document.getElementById('submitButton').addEventListener('click', function() {
+      const teams = [];
+      
+      // Collect team data from inputs
+      for (let i = 1; i <= 15; i++) {
+        const teamName = document.getElementById(`team${i}Name`).value;
+        const teamPoints = document.getElementById(`team${i}Points`).value;
+        
+        // Check if the inputs are valid
+        if (teamName && teamPoints) {
+          // Parse points as a float to preserve decimal values
+          teams.push({ name: teamName, points: parseFloat(teamPoints) });
+        }
+      }
+
+      // Sort the teams based on points (descending order)
+      teams.sort((a, b) => b.points - a.points);
+
+      // Store the sorted teams in localStorage
+      localStorage.setItem('teams', JSON.stringify(teams));
+
+      // Redirect to the leaderboard page
+      window.location.href = 'Leaderboard.html';
+    });
+  </script>
+</body>
+</html>

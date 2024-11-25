@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard</title>
+  <link rel="stylesheet" href="leaderboard.css">
+  <style>
+    /* Style for logos at the top corners */
+    .top-logo {
+      position: absolute;
+      height: auto; /* Maintain aspect ratio */
+      margin-left: 25px;
+      margin-top: 10px;
+    }
+  
+    .top-left {
+      width: 100px; /* Size for the NISB logo */
+      top: 10px;
+      left: 10px;
+    }
+  
+    .top-right {
+      width: 150px; /* Increased size for the IEEE logo */
+      top: 10px;
+      right: 10px;
+      margin-right: 100px;
+      margin-top: 38px;
+    }
+  
+    /* Ensure the body has proper positioning */
+    body {
+      position: relative;
+    }
+  </style>
+  
+</head>
+<body>
+  <!-- Logos at top corners -->
+  <img src="images/nisblogo.png" alt="NISB Logo" class="top-logo top-left">
+  <img src="images/ieeelogo.png" alt="IEEE Logo" class="top-logo top-right">
+
+  <!-- Leaderboard Title -->
+  <h1 class="leaderboard-title">Spark Tank Leaderboard</h1>
+
+  <!-- Leaderboard Container -->
+  <div class="leaderboard-container" id="leaderboard-body">
+    <!-- Leaderboard rows will be populated here via JavaScript -->
+  </div>
+
+  <!-- Include the canvas-confetti library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    // Confetti Effect
+    function startConfetti() {
+      const duration = 3 * 1000; // Duration in milliseconds
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+        });
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+
+    // Trigger confetti on page load
+    window.onload = function () {
+      startConfetti();
+    };
+  </script>
+
+  <script>
+    // Retrieve teams from localStorage, default to an empty array if null
+    let teams = JSON.parse(localStorage.getItem('teams')) || [];
+
+    // Function to render the leaderboard
+    function renderLeaderboard() {
+      const leaderboardBody = document.getElementById('leaderboard-body');
+      leaderboardBody.innerHTML = ''; // Clear previous rows
+
+      // Sort teams by points in descending order
+      teams.sort((a, b) => b.points - a.points);
+
+      // Populate rows
+      teams.forEach((team, index) => {
+        const row = document.createElement('div');
+        row.classList.add('leaderboard-row');
+        row.innerHTML = `
+          <div class="rank">${index + 1}</div>
+          <div class="team-name">${team.name}</div>
+          <div class="points">${team.points.toFixed(2)}</div>
+        `;
+        leaderboardBody.appendChild(row);
+      });
+    }
+
+    // Initial render
+    renderLeaderboard();
+
+    // Debugging: Log the teams array to verify values
+    console.log("Teams data:", teams);
+  </script>
+</body>
+</html>
